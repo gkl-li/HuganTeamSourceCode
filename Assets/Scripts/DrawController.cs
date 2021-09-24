@@ -76,7 +76,7 @@ public class DrawController : MonoBehaviour
         var startPosition = positions[0];
         var endPosition = positions[lineRenderer.positionCount-1];
         var relativePosition = (endPosition - startPosition);
-        return new Vector3(-relativePosition.x,relativePosition.y,relativePosition.z);
+        return GravityChanger.GetAdjustedForce(new Vector3(-relativePosition.x, relativePosition.y, relativePosition.z));
     }
 
 

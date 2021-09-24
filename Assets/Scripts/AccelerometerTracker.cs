@@ -27,48 +27,40 @@ public class AccelerometerTracker : MonoBehaviour
         {
             if (Input.acceleration.y < -0.8f && Input.acceleration.y > -1f)
             {
-                Physics.gravity = new Vector3(0, -9.81f, 0) * GravityChanger.gravityScale;
-                oldAngles.z = -124;
+                oldAngles.z = GravityChanger.ChangeGravityDirection(GravityChanger.GravityDirection.BOTTOM);
             }
             else if (Input.acceleration.y > 0.8f && Input.acceleration.y < 1f)
             {
-                Physics.gravity = new Vector3(0, 9.81f, 0) * GravityChanger.gravityScale;
-                oldAngles.z = -124 + 180;
+                oldAngles.z = GravityChanger.ChangeGravityDirection(GravityChanger.GravityDirection.TOP);
             }
             else if (Input.acceleration.x < -0.8f && Input.acceleration.x > -1f)
             {
-                Physics.gravity = new Vector3(-9.81f, 0, 0) * GravityChanger.gravityScale;
-                oldAngles.z = -124 + 270;
+                oldAngles.z = GravityChanger.ChangeGravityDirection(GravityChanger.GravityDirection.LEFT);
             }
             else if (Input.acceleration.x > 0.8f && Input.acceleration.x < 1f)
             {
-                Physics.gravity = new Vector3(9.81f, 0, 0) * GravityChanger.gravityScale;
-                oldAngles.z = -124 + 90;
+                oldAngles.z = GravityChanger.ChangeGravityDirection(GravityChanger.GravityDirection.RIGHT);
             }
         }
         else
         {
             if (modZAxisAngle > 75 && modZAxisAngle < 105)
             {
-                Physics.gravity = new Vector3(0, -9.81f, 0) * GravityChanger.gravityScale;
-                oldAngles.z = -124;
+                oldAngles.z = GravityChanger.ChangeGravityDirection(GravityChanger.GravityDirection.BOTTOM);
             }
             else if (modZAxisAngle > 165 && modZAxisAngle < 195)
             {
-                Physics.gravity = new Vector3(9.81f, 0, 0) * GravityChanger.gravityScale;
-                oldAngles.z = -124 + 90;
+                oldAngles.z = GravityChanger.ChangeGravityDirection(GravityChanger.GravityDirection.RIGHT);
             }
             else if (modZAxisAngle > 255 && modZAxisAngle < 285)
             {
-                Physics.gravity = new Vector3(0, 9.81f, 0) * GravityChanger.gravityScale;
-                oldAngles.z = -124 + 180;
+                oldAngles.z = GravityChanger.ChangeGravityDirection(GravityChanger.GravityDirection.TOP);
             }
             else if (modZAxisAngle > 345 || modZAxisAngle < 15)
             {
-                Physics.gravity = new Vector3(-9.81f, 0, 0) * GravityChanger.gravityScale;
-                oldAngles.z = -124 + 270;
+                oldAngles.z = GravityChanger.ChangeGravityDirection(GravityChanger.GravityDirection.LEFT);
             }
         }
-        gravityDirectionIndicator.rectTransform.rotation = Quaternion.Euler(new Vector3(oldAngles.x, oldAngles.y, oldAngles.z));
+        gravityDirectionIndicator.rectTransform.rotation = Quaternion.Euler(new Vector3(oldAngles.x, oldAngles.y, -124+ oldAngles.z));
     }
 }
