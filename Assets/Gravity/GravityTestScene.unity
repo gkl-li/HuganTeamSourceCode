@@ -1664,6 +1664,7 @@ GameObject:
   - component: {fileID: 682185338}
   - component: {fileID: 682185337}
   - component: {fileID: 682185340}
+  - component: {fileID: 682185341}
   m_Layer: 0
   m_Name: PhoneScreenCamera
   m_TagString: Untagged
@@ -1749,6 +1750,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: e45f292883a11204a976546d5407e4c5, type: 2}
+--- !u!114 &682185341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682185336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f55f95cbe56454bbb8196717224c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  refTransform: {fileID: 1574414491}
+  graphicsMode: 0
+  axisLimits:
+    xLimits:
+      min: -9999
+      max: 9999
+    yLimits:
+      min: -6.86
+      max: 9999
+    zLimits:
+      min: -9999
+      max: 9999
 --- !u!1 &717888502
 GameObject:
   m_ObjectHideFlags: 0
