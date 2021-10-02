@@ -116,6 +116,8 @@
     <Compile Include="Assets\PostProcessing\Runtime\Models\AntialiasingModel.cs" />
     <Compile Include="Assets\Files_by_Kanericky\Scripts\CameraController.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Models\DitheringModel.cs" />
+    <Compile Include="Assets\Collectable.cs" />
+    <Compile Include="Assets\CollectionSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Smartphone\StandardColorMask.shader" />
