@@ -1,21 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class MapRotator : MonoBehaviour
 {
-    public Animator mapRotateAnim;
+    public LevelController001 levelController;
+    public Collider playerCollider;
+    public Rigidbody playerRig;
+    public Transform levelMap;
 
     static int[] rotateIndex = { 0, 1, 2, 3 };
     int currentRotateIndex = rotateIndex[0];
 
     bool isSwitching = false;
 
+    private void Start()
+    {
+        levelController = GameObject.Find("LevelController").GetComponent<LevelController001>();
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && !isSwitching)
+        if ( (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E)) && !isSwitching && levelController.levelState == LevelController001.LevelState.ThreeD)
         {
+            
             isSwitching = true;
+
+            if(playerCollider != null)
+                playerCollider.enabled = false;
+
+            playerRig.useGravity = false;
 
             StartCoroutine(Switching());
             
@@ -24,31 +39,16 @@ public class MapRotator : MonoBehaviour
     }
 
     IEnumerator Switching()
-    {
+    {   
+        
+        int rotateDir = Input.GetKeyDown(KeyCode.Q) ? 1 : -1;
+        levelMap.DORotate(new Vector3(0, 90 * rotateDir, 0), .5f, RotateMode.WorldAxisAdd).SetEase(Ease.OutBack);
 
-        switch (currentRotateIndex)
-        {
-
-            case 0:
-                mapRotateAnim.Play("Rotate01");
-                break;
-
-            case 1:
-                mapRotateAnim.Play("Rotate02");
-                break;
-
-            case 2:
-                mapRotateAnim.Play("Rotate03");
-                break;
-
-            case 3:
-                mapRotateAnim.Play("Rotate04");
-                break;
-        }
-
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.6f);
 
         isSwitching = false;
+        playerCollider.enabled = true;
+        playerRig.useGravity = true;
 
     }
 

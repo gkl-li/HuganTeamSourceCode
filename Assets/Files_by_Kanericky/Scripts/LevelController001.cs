@@ -6,8 +6,18 @@ public class LevelController001 : MonoBehaviour
 {
 
     public GameObject player;
+
+    [SerializeField]
+    public List<GameObject> cubes;
     public DoorTrigger door;
-    public Vector3 respawnPosition = new Vector3(-7.8f, 0.5f, 2.2f);
+    public Vector3 respawnPosition;
+
+    public enum LevelState {
+        TwoD,
+        ThreeD,
+    }
+
+    public LevelState levelState;
 
     PlayerController playerController;
 
@@ -24,14 +34,23 @@ public class LevelController001 : MonoBehaviour
         {
             // TODO: The player pass this level. - Load Next Level
             Debug.Log("PLAYER PASS THE LEVEL!");
+            StartCollapse();
+            Destroy(player);
+            
+            //mainCam.Play("LevelClash");
         }
 
         if (playerController.getPlayerState() == PlayerController.PlayerState.death)
         {
             RespawnPlayer();
             playerController.setPlayerState(PlayerController.PlayerState.idle);
+            
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit(0);
+        }
 
     }
 
@@ -39,6 +58,16 @@ public class LevelController001 : MonoBehaviour
     {
         player.transform.position = respawnPosition;
         player.transform.rotation = Quaternion.Euler(Vector3.zero);
+    }
+
+    void StartCollapse()
+    {
+        for(int i = 0; i < cubes.Count; i++)
+        {
+            cubes[i].AddComponent<Rigidbody>();
+        }
+                
+
     }
 
 }

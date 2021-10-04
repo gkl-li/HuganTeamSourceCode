@@ -5,36 +5,40 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     
-    public Camera mainCam;
+    public Animator mainCam;
 
-    [SerializeField]
-    public Vector3 camOriginPos, camTargetPos;
+    public BoxCollider camCheckPoint;
 
-    [SerializeField]
-    public Vector3 camOriginRot, camTargetRot;
+    public LevelController001 levelController;
 
-    public float lerpPara = .2f;
-
-    public Animator camAnimController;
+    bool modeTogger = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        levelController = GameObject.Find("LevelController").GetComponent<LevelController001>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            camAnimController.Play("2Dto3D");
+            modeTogger = !modeTogger;
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (modeTogger)
         {
-            camAnimController.Play("3Dto2D");
+            levelController.levelState = LevelController001.LevelState.ThreeD;
+            mainCam.Play("2Dto3D");
         }
+        else if (levelController.levelState == LevelController001.LevelState.ThreeD)
+        {
+            levelController.levelState = LevelController001.LevelState.TwoD;
+            mainCam.Play("3Dto2D");
+        }
+
     }
 }
